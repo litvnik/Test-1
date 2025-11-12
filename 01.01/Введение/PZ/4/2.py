@@ -1,0 +1,5 @@
+input_str = input("Введите строку: ")
+char_list = list(input_str)
+unique_chars = list(dict.fromkeys(char_list))
+result_tuple = tuple(unique_chars)
+print("Итоговый кортеж:", result_tuple)
