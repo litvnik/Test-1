@@ -33,7 +33,7 @@ for student in high_achievers:
 # Сортируем всех студентов по среднему баллу по убыванию
 sorted_students = sorted(students, key=lambda s: s.average_grade(), reverse=True)
 
-# Выводим имя и средний балл всех студентов (по убыванию — "лучшие" первыми)
+# Выводим имя и средний балл всех студентов
 print("\nЛучшие студенты (по убыванию среднего балла):")
 for student in sorted_students:
     print(f"  {student.name}: {round(student.average_grade(), 2)}")
