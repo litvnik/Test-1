@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Медицинский портал - Врачи</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="logo">RusMediCare</div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'index' %}">Услуги</a></li>
+                <li><a href="{% url 'doctors' %}">Врачи</a></li>
+                <li><a href="#">Запись</a></li>
+                <li><a href="#">Блог</a></li>
+            </ul>
+        </nav>
+        <div class="emergency">+7 (999) 123-45-67</div>
+    </header>
+
+    <main>
+        <section>
+            <h1 class="section-title">Наши врачи</h1>
+            <p>Выберите специалиста по вашему запросу.</p>
+        </section>
+        <section class="filters">
+            <h3>Фильтры по специализациям</h3>
+            <div class="filter-group">
+                <label for="specialty">Специализация:</label>
+                <select id="specialty">
+                    <option value="">Все специальности</option>
+                    <option value="therapist">Терапевт</option>
+                    <option value="cardiologist">Кардиолог</option>
+                    <option value="neurologist">Невролог</option>
+                    <option value="pediatrician">Педиатр</option>
+                    <option value="dentist">Стоматолог</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="rating">Рейтинг (от):</label>
+                <select id="rating">
+                    <option value="0">Любой</option>
+                    <option value="4">4.0 и выше</option>
+                    <option value="4.5">4.5 и выше</option>
+                    <option value="5">5.0</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="search">Поиск по имени:</label>
+                <input type="text" id="search" placeholder="Введите имя врача...">
+            </div>
+        </section>
+        <section>
+            <h2 class="section-title">Список врачей</h2>
+            <div class="doctors-grid">
+                <div class="doctor-card"
+                data-specialty="therapist"
+                data-rating="4.7"
+                data-name="Иванова">
+                    <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Доктор Иванова">
+                    <h3>Доктор Иванова</h3>
+                    <p class="specialty">Терапевт, стаж 12 лет</p>
+                    <p class="experience">Рейтинг: ★★★★☆ (4.7)</p>
+                    <a href="#" class="book-button">Записаться</a>
+                </div>
+                <div class="doctor-card"
+                data-specialty="cardiologist"
+                data-rating="5.0"
+                data-name="Петров">
+                    <img src="https://plus.unsplash.com/premium_photo-1663039809912-8ca34f962fc4" alt="Доктор Петров">
+                    <h3>Доктор Петров</h3>
+                    <p class="specialty">Кардиолог, стаж 15 лет</p>
+                    <p class="experience">Рейтинг: ★★★★★ (5.0)</p>
+                    <a href="#" class="book-button">Записаться</a>
+                </div>
+                <div class="doctor-card"
+                data-specialty="neurologist"
+                data-rating="4.4"
+                data-name="Сидорова">
+                    <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Доктор Сидорова">
+                    <h3>Доктор Сидорова</h3>
+                    <p class="specialty">Невролог, стаж 8 лет</p>
+                    <p class="experience">Рейтинг: ★★★★☆ (4.4)</p>
+                    <a href="#" class="book-button">Записаться</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Карта клиники</h4>
+                <p>Наши адреса и как к нам добраться.</p>
+            </div>
+            <div class="footer-section">
+                <h4>График работы</h4>
+                <p>Пн-Пт: 8:00–20:00<br>Сб: 9:00–18:00<br>Вс: выходной</p>
+            </div>
+            <div class="footer-section">
+                <h4>Документы</h4>
+                <div class="footer-links">
+                    <a href="#">Лицензия</a>
+                    <a href="#">Стандарты качества</a>
+                </div>
+            </div>
+        </div>
+        <p class="copyright">&copy; 2025 Медицинский Портал. Все права защищены.</p>
+    </footer>
+
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+    const cards = document.querySelectorAll('.doctor-card');
+    const specialtySelect = document.getElementById('specialty');
+    const ratingSelect = document.getElementById('rating');
+    const searchInput = document.getElementById('search');
+
+    function filterCards() {
+        const selectedSpecialty = specialtySelect.value;
+        const minRating = parseFloat(ratingSelect.value) || 0;
+        const searchTerm = searchInput.value.trim().toLowerCase();
+
+        cards.forEach(card => {
+            const specialty = card.dataset.specialty;
+            const rating = parseFloat(card.dataset.rating);
+            const name = card.dataset.name.toLowerCase();
+
+            const matchesSpecialty = !selectedSpecialty || specialty === selectedSpecialty;
+            const matchesRating = rating >= minRating;
+            const matchesSearch = !searchTerm || name.includes(searchTerm);
+
+            if (matchesSpecialty && matchesRating && matchesSearch) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    // Применяем фильтрацию при любом изменении
+    specialtySelect.addEventListener('change', filterCards);
+    ratingSelect.addEventListener('change', filterCards);
+    searchInput.addEventListener('input', filterCards);
+});
+</script>
+</body>
+</html>

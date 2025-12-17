@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Медицинский портал - Главная</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="logo">RusMediCare</div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'index' %}">Услуги</a></li>
+                <li><a href="{% url 'doctors' %}">Врачи</a></li>
+                <li><a href="#">Запись</a></li>
+                <li><a href="#">Блог</a></li>
+            </ul>
+        </nav>
+        <div class="emergency">+7 (999) 123-45-67</div>
+    </header>
+
+    <main>
+        <section>
+            <h1 class="section-title">Добро пожаловать в Медицинский Портал</h1>
+            <p>Ваш надежный помощник в вопросах здоровья и медицинского обслуживания.</p>
+        </section>
+        <section>
+            <h2 class="section-title">Срочная помощь</h2>
+            <p>Нужна неотложная помощь? Нажмите кнопку ниже, чтобы вызвать скорую помощь.</p>
+            <a href="#" class="emergency-button">Вызвать скорую</a>
+        </section>
+        <section>
+            <h2 class="section-title">Статьи о здоровье</h2>
+            <div class="articles-grid">
+                <div class="article-card">
+                    <h3>Правильное питание для диабетиков</h3>
+                    <p>Полезные советы и рекомендации по составлению рациона при сахарном диабете.</p>
+                </div>
+                <div class="article-card">
+                    <h3>Профилактика сердечно-сосудистых заболеваний</h3>
+                    <p>Как снизить риск развития болезней сердца и сосудов в повседневной жизни.</p>
+                </div>
+                <div class="article-card">
+                    <h3>Лечебная физкультура при остеохондрозе</h3>
+                    <p>Комплекс упражнений, которые помогут снять боль и улучшить подвижность.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Карта клиники</h4>
+                <p>Наши адреса и как к нам добраться.</p>
+            </div>
+            <div class="footer-section">
+                <h4>График работы</h4>
+                <p>Пн-Пт: 8:00–20:00<br>Сб: 9:00–18:00<br>Вс: выходной</p>
+            </div>
+            <div class="footer-section">
+                <h4>Документы</h4>
+                <div class="footer-links">
+                    <a href="#">Лицензия</a>
+                    <a href="#">Стандарты качества</a>
+                </div>
+            </div>
+        </div>
+        <p class="copyright">&copy; 2025 Медицинский Портал. Все права защищены.</p>
+    </footer>
+</body>
+</html>
