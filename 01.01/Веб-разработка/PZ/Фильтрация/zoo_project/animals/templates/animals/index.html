@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Птицы и млекопитающие</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.19.2/dist/css/uikit.min.css" />
+</head>
+<body class="uk-container uk-margin-large-top">
+    <h1 class="uk-heading-large">Животные</h1>
+
+    <!-- Форма фильтрации -->
+    <form method="get" class="uk-margin-bottom">
+        <div class="uk-margin">
+            <label>Место обитания</label>
+            <select name="habitat" class="uk-select" onchange="this.form.submit()">
+                <option value="">Все</option>
+                {% for h in habitats %}
+                    <option value="{{ h }}" {% if h == selected_habitat %}selected{% endif %}>{{ h }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="uk-margin">
+            <label>Поиск птиц по названию</label>
+            <input type="text" name="bird_name" value="{{ bird_name_query }}" placeholder="Например: Орёл" class="uk-input" />
+        </div>
+        <button type="submit" class="uk-button uk-button-primary">Применить</button>
+        <a href="/" class="uk-button uk-button-default uk-margin-left">Сбросить</a>
+    </form>
+
+    <hr class="uk-divider-icon">
+
+    <h2 class="uk-heading-medium">Млекопитающие</h2>
+    <ul class="uk-list uk-list-striped">
+        {% for m in mammals %}
+            <li>{{ m.name }} — {{ m.habitat }}</li>
+        {% empty %}
+            <li>Нет млекопитающих</li>
+        {% endfor %}
+    </ul>
+
+    <h2 class="uk-heading-medium uk-margin-large-top">Птицы</h2>
+    <ul class="uk-list uk-list-striped">
+        {% for b in birds %}
+            <li>{{ b.name }} — {{ b.habitat }}</li>
+        {% empty %}
+            <li>Нет птиц</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
